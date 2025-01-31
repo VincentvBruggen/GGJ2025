@@ -1,4 +1,5 @@
 using EasyTextEffects;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class hitshake : MonoBehaviour
@@ -17,5 +18,7 @@ public class hitshake : MonoBehaviour
         {
             textEffect.StopManualEffects();
         }
+
+
     }
 }

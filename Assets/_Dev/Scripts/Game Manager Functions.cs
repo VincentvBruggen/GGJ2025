@@ -19,6 +19,10 @@ public class GameManagerFunctions : MonoBehaviour
 
         // Change Texts
         m_matchLengthText.SetText("Match Length: " + m_gameManager.matchLength.ToString());
+        m_stockAmountText.SetText("Stock Amount: " + m_gameManager.stockAmount.ToString());
+        m_itemDropRateText.SetText("Item Drop Rate: " + m_gameManager.itemDropRate.ToString());
+        m_knockBackMultiplierText.SetText("Knockback: x" + m_gameManager.knockBackMultiplier.ToString());
+        m_damageMultiplierText.SetText("Damage: x" + m_gameManager.damageMultiplier.ToString());
     }
 
     public void ResetToDefaultMatchSettings()
@@ -40,7 +44,7 @@ public class GameManagerFunctions : MonoBehaviour
 
     public void ChangeScene(string _scene)
     {
-        if (m_gameManager != null) 
+        if (m_gameManager != null)
         {
             m_gameManager.ChangeScene(_scene);
         }
@@ -48,19 +52,29 @@ public class GameManagerFunctions : MonoBehaviour
 
     public void ChangeMatchLength(float _amount)
     {
-        if (m_gameManager.matchLength > 0 && m_gameManager != null)
+        if (m_gameManager != null)
         {
             m_gameManager.matchLength += _amount;
 
-            m_matchLengthText.SetText("Match Length: " + m_gameManager.matchLength.ToString());
+            if (m_gameManager.matchLength < 15)
+            {
+                m_gameManager.matchLength = 15;
+            }
+
+            m_matchLengthText.SetText("Match Length: " + m_gameManager.matchLength.ToString() + "S");
         }
     }
 
     public void ChangeStockAmount(int _amount)
     {
-        if (m_gameManager.stockAmount > 0 && m_gameManager != null)
+        if (m_gameManager != null)
         {
             m_gameManager.stockAmount += _amount;
+
+            if (m_gameManager.stockAmount < 1)
+            {
+                m_gameManager.stockAmount = 1;
+            }
 
             m_stockAmountText.SetText("Stock Amount: " + m_gameManager.stockAmount.ToString());
         }
@@ -68,30 +82,45 @@ public class GameManagerFunctions : MonoBehaviour
 
     public void ChangeItemDropRate(float _amount)
     {
-        if (m_gameManager.itemDropRate > 0)
+        if (m_gameManager != null)
         {
             m_gameManager.itemDropRate += _amount;
 
+            if (m_gameManager.itemDropRate < 0)
+            {
+                m_gameManager.itemDropRate = 0;
+            }
+
             m_itemDropRateText.SetText("Item Drop Rate: " + m_gameManager.itemDropRate.ToString());
-        }
+        }   
     }
 
     public void ChangeKnockBackMultiplier(float _amount)
     {
-        if (m_gameManager.knockBackMultiplier > 0 && m_gameManager != null)
+        if (m_gameManager != null)
         {
             m_gameManager.knockBackMultiplier += _amount;
-        
+            
+            if (m_gameManager.knockBackMultiplier < 0)
+            {
+                m_gameManager.knockBackMultiplier = 0;
+            }
+
             m_knockBackMultiplierText.SetText("Knockback: x" + m_gameManager.knockBackMultiplier.ToString());
         }
     }
 
     public void ChangeDamageMultiplier(float _amount)
     {
-        if (m_gameManager.knockBackMultiplier > 0 && m_gameManager != null)
+        if (m_gameManager != null)
         {
             m_gameManager.damageMultiplier += _amount;
         
+            if (m_gameManager.damageMultiplier < 0)
+            {
+                m_gameManager.damageMultiplier = 0;
+            }
+
             m_damageMultiplierText.SetText("Damage: x" + m_gameManager.damageMultiplier.ToString());
         }
     }
