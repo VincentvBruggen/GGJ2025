@@ -21,12 +21,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerInput playerInput;
 
     private bool groundcheck = false;
+    private GameManager gameManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         if(rb == null){ rb = GetComponent<Rigidbody>(); }
 
         if(playerInput == null){ playerInput = GetComponent<PlayerInput>(); }
+
+        gameManager = GameManager.Instance;
+        if(gameManager == null)
+        {
+            gameManager = new GameManager();
+        }
     }
 
     // Update is called once per frame
@@ -76,7 +83,7 @@ public class PlayerController : MonoBehaviour
 
             if(Vector3.Max(myVelocity, otherVelocity) == myVelocity)
             {
-                
+                collision.gameObject.GetComponent<PlayerController>().currentDamage += Mathf.RoundToInt((myVelocity.magnitude / 2) * gameManager.damageMultiplier);
             }
         }
     }
