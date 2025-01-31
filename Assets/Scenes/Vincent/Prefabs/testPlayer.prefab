@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 996105513374347112}
   m_Layer: 0
   m_Name: testPlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -349,9 +349,9 @@ MonoBehaviour:
   jumpForce: 5
   groundCheckLayer:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 64
   groundCheckOrigin: {fileID: 8964850192601911060}
-  groundCheckRange: 0.2
+  groundCheckRange: 0.6
   rb: {fileID: 3885088263791782353}
   playerInput: {fileID: 6889384517293752116}
 --- !u!114 &996105513374347112
