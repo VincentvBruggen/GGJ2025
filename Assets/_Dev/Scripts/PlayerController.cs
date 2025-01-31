@@ -28,15 +28,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //groundCheckOrigin.position = transform.position + (Vector3.down * 0.5f);
+        //groundCheckOrigin.eulerAngles = Vector3.zero;
+
+        groundcheck = Physics.Raycast(transform.position, Vector3.down, groundCheckRange, groundCheckLayer);
     }
 
     private void FixedUpdate()
     {
-        groundCheckOrigin.position = transform.position + (Vector3.down * 0.5f);
-        groundCheckOrigin.eulerAngles = Vector3.zero;
-
-        groundcheck = Physics.SphereCast(transform.position, 0.5f ,Vector3.down, out RaycastHit hit, groundCheckRange, groundCheckLayer);
     }
 
     public void Move(InputAction.CallbackContext ctx)
@@ -59,10 +58,15 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
 
-        Gizmos.DrawWireSphere(groundCheckOrigin.position, 0.5f);
+        Gizmos.DrawRay(groundCheckOrigin.position, Vector3.down * groundCheckRange);
     }
 }

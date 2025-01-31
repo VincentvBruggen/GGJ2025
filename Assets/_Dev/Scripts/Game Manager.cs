@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     public GameSettingsSO m_defaultGameSettings;
 
-    public Scene currentScene;
+    public string currentScene;
 
     public static GameManager Instance
     {
@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        currentScene = scene;
+        currentScene = scene.ToString();
     }
 
     public void ResetToDefaultMatchSettings()
