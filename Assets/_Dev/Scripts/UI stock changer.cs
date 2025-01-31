@@ -1,19 +1,19 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIcolorchanger : MonoBehaviour
+public class UIstockchanger : MonoBehaviour
 {
-    public Color ColorStart;
     [SerializeField] private Image[] images;
+    public Sprite Spritestart;
     private void Start()
     {
-        changeColor(ColorStart);
+        changeStock(Spritestart);
     }
-    public void changeColor(Color newColor)
+    public void changeStock(Sprite newStock)
     {
         for (int i = 0; i < images.Length; i++)
         {
-            images[i].color = newColor;
+            images[i].sprite = newStock;
         }
     }
-} 
+}
