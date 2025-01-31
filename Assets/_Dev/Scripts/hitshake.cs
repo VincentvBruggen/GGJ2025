@@ -5,20 +5,12 @@ using UnityEngine;
 public class hitshake : MonoBehaviour
 {
     public TextEffect textEffect;
-
-    void Update()
+    public void shake()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            textEffect.StartManualEffect("shake");
-            textEffect.StartManualEffect("shit");
-
-        }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            textEffect.StopManualEffects();
-        }
-
-
+        textEffect.StartManualEffect("shake");
+    }
+    public void stopShake()
+    {
+        textEffect.StopManualEffects();
     }
 }
