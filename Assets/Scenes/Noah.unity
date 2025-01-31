@@ -204,13 +204,13 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1111913533}
         m_TargetAssemblyTypeName: GameManagerFunctions, Assembly-CSharp
-        m_MethodName: ChangeStockAmount
-        m_Mode: 3
+        m_MethodName: ChangeItemDropRate
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: -1
-          m_FloatArgument: 15
+          m_FloatArgument: -1
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -750,7 +750,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 1
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1100,8 +1100,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 224.13, y: 0.0005187988}
-  m_SizeDelta: {x: 1471.7, y: 312.44}
+  m_AnchoredPosition: {x: 224.13, y: 10.877}
+  m_SizeDelta: {x: 1471.7, y: 290.6871}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &305375928
 MonoBehaviour:
@@ -1116,9 +1116,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 25
+    m_Left: 50
     m_Right: 0
-    m_Top: 25
+    m_Top: 50
     m_Bottom: 0
   m_ChildAlignment: 0
   m_StartCorner: 0
@@ -2048,12 +2048,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1111913533}
         m_TargetAssemblyTypeName: GameManagerFunctions, Assembly-CSharp
-        m_MethodName: ChangeStockAmount
-        m_Mode: 3
+        m_MethodName: ChangeItemDropRate
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 1
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3841,7 +3841,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 15
+          m_FloatArgument: -15
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
