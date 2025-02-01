@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 10f;
     public float knockbackForce = 2f;
     public float knockbackResistance = 0f;
+    public int stocks;
 
     [Header("Ground check")]
     [SerializeField] private LayerMask groundCheckLayer;
@@ -20,7 +21,9 @@ public class PlayerController : MonoBehaviour
     [Header("References")]
     [SerializeField] private Rigidbody rb;
     [SerializeField] private PlayerInput playerInput;
-    [SerializeField] private PlayerUIReferencing uiReference;
+    [SerializeField] private readyUp canvas;
+    public PlayerUIReferencing uiReference;
+    [SerializeField] InputAction ready;
 
     private bool groundcheck = false;
     private GameManager gameManager;
@@ -37,19 +40,29 @@ public class PlayerController : MonoBehaviour
             gameManager = new GameManager();
         }
 
-        if(uiReference == null)
-        {
-            PlayerUIReferencing[] playerUIs = GameObject.Find("PlayerUI's").GetComponentsInChildren<PlayerUIReferencing>();
+        
 
-            uiReference = playerUIs[playerInput.playerIndex];
+        if(canvas == null)
+        {
+            canvas = FindFirstObjectByType<readyUp>();
         }
 
+        canvas.playerIcons[playerInput.playerIndex].SetActive(true);
         uiReference.playerTitle.SetText("player: " + playerInput.playerIndex.ToString());
+        stocks = uiReference.stockChanger.images.Length;
+
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (uiReference == null && gameManager.isPlaying)
+        {
+            PlayerUIReferencing[] playerUIs = GameObject.Find("PlayerUI's").GetComponentsInChildren<PlayerUIReferencing>();
+
+            uiReference = playerUIs[playerInput.playerIndex];
+        }
         uiReference.damageCounter.SetText(currentDamage.ToString() + "%");
         if (Physics.Raycast(transform.position, Vector3.down, groundCheckRange, groundCheckLayer))
         {
@@ -63,6 +76,10 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(!gameManager.isPlaying)
+        {
+            rb.linearVelocity = Vector3.zero;
+        }
     }
 
     public void Move(InputAction.CallbackContext ctx)
@@ -85,6 +102,11 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void Ready()
+    {
+        canvas.toggleready(playerInput);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Player"))
@@ -99,7 +121,7 @@ public class PlayerController : MonoBehaviour
             {
                 collision.gameObject.GetComponent<PlayerController>().currentDamage += Mathf.RoundToInt((myVelocity.magnitude) * gameManager.damageMultiplier);
 
-                collision.rigidbody.AddForceAtPosition(myVelocity * knockbackForce, transform.position, ForceMode.Impulse);
+                collision.rigidbody.AddForceAtPosition((myVelocity * knockbackForce * (1 + (currentDamage / 100))), transform.position, ForceMode.Impulse);
                 Debug.Log("my velocity is: "+ myVelocity + " I am: " + name);
             }
         }

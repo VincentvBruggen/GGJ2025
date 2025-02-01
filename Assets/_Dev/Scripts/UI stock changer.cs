@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class UIstockchanger : MonoBehaviour
 {
     [SerializeField] private Transform stockParent;
-    [SerializeField] private GameObject[] images;
+    public GameObject[] images;
     public GameObject Spritestart;
 
     private GameManager manager;
