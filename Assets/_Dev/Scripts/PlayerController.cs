@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,9 +17,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform groundCheckOrigin;
     [SerializeField] private float groundCheckRange = 0.2f;
 
-    [Header("Refernces")]
+    [Header("References")]
     [SerializeField] private Rigidbody rb;
     [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private PlayerUIReferencing uiReference;
 
     private bool groundcheck = false;
     private GameManager gameManager;
@@ -34,12 +36,21 @@ public class PlayerController : MonoBehaviour
         {
             gameManager = new GameManager();
         }
+
+        if(uiReference == null)
+        {
+            PlayerUIReferencing[] playerUIs = GameObject.Find("PlayerUI's").GetComponentsInChildren<PlayerUIReferencing>();
+
+            uiReference = playerUIs[playerInput.playerIndex];
+        }
+
+        uiReference.playerTitle.SetText("player: " + playerInput.playerIndex.ToString());
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        uiReference.damageCounter.SetText(currentDamage.ToString() + "%");
         if (Physics.Raycast(transform.position, Vector3.down, groundCheckRange, groundCheckLayer))
         {
             groundcheck = true;
@@ -78,6 +89,8 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.collider.CompareTag("Player"))
         {
+            uiReference.shakeFX.shake();
+
             Vector3 myVelocity = rb.linearVelocity;
             Vector3 otherVelocity = collision.rigidbody.linearVelocity;
 
