@@ -3,13 +3,14 @@ using UnityEngine.UI;
 
 public class UIstockchanger : MonoBehaviour
 {
-    [SerializeField] private Image[] images;
-    public Sprite Spritestart;
+    [SerializeField] private Transform stockParent;
+    [SerializeField] private GameObject[] images;
+    public GameObject Spritestart;
 
     private GameManager manager;
     private void Start()
     {
-        changeStock(Spritestart);
+        images = null;
         
         manager = GameManager.Instance;
 
@@ -17,13 +18,20 @@ public class UIstockchanger : MonoBehaviour
         {
             manager = new GameManager();
         }
+        changeStock(Spritestart);
     }
-    public void changeStock(Sprite newStock)
+    public void changeStock(GameObject newStock)
     {
-        images = new Image[manager.stockAmount];
+        images = new GameObject[manager.stockAmount];
         for (int i = 0; i < images.Length; i++)
         {
-            images[i].sprite = newStock;
+            GameObject img = Instantiate(Spritestart, stockParent);
+            img.GetComponent<Image>().color = GetComponent<UIcolorchanger>().ColorStart;
+            images[i] = img;
         }
+    }
+    public void removeStock()
+    {
+        Destroy(images[images.Length - 1]);
     }
 }
