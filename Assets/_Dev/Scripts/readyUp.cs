@@ -10,11 +10,11 @@ public class readyUp : MonoBehaviour
     private bool player3;
     private bool player4;
     public UnityEvent ifPlayersReady;
-    public void toggleready(InputAction.CallbackContext ctx)
+    public void toggleready(PlayerInput playerInput)
     {
         int nummber = 0;
 
-        nummber = ctx.ReadValue<int>();
+        nummber = playerInput.playerIndex;
         Debug.Log(nummber);
         switch (nummber)
         {
