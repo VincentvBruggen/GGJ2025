@@ -1,6 +1,10 @@
+using System.Collections.Generic;
+using System.Collections;
+using NUnit.Framework;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,7 +21,13 @@ public class GameManager : MonoBehaviour
     public GameSettingsSO m_defaultGameSettings;
 
     public string currentScene;
+    public List<GameObject> players = new List<GameObject>();
 
+    public bool isPlaying = false;
+    [SerializeField] private TextMeshProUGUI startGameCount;
+    [SerializeField] private GameObject startCanvas;
+    [SerializeField] private GameCanvasManager gameCanvas;
+   
     public static GameManager Instance
     {
         get
@@ -51,6 +61,19 @@ public class GameManager : MonoBehaviour
         ResetToDefaultMatchSettings();
     }
 
+    private void Start()
+    {
+        startGameCount.gameObject.SetActive(false);
+        gameCanvas.gameObject.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if(players.Count <= 1 && isPlaying)
+        {
+
+        }
+    }
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -78,5 +101,34 @@ public class GameManager : MonoBehaviour
     public void ChangeScene(string _scene)
     {
         SceneManager.LoadScene(_scene);
+    }
+
+    public void StartGame()
+    {
+        StartCoroutine(StartSequence());
+    }
+
+    private IEnumerator StartSequence()
+    {
+        startGameCount.gameObject.SetActive(true);
+        float duration = 3f;
+        float counter = 0;
+        while (counter < duration) 
+        {
+            startGameCount.SetText(counter.ToString());
+            yield return new WaitForSeconds(1);
+        }
+
+        startGameCount.gameObject.SetActive(false);
+        isPlaying = true;
+        gameCanvas.gameObject.SetActive(true);
+        startCanvas.SetActive(false);
+    }
+
+    private IEnumerator EndgameSequence()
+    {
+        gameCanvas.gameEndText.SetText("Winner is: Player  " + players[0].GetComponent<PlayerInput>().playerIndex.ToString());
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene(0);
     }
 }
