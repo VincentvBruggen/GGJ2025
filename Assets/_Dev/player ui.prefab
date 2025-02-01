@@ -616,6 +616,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6469995873236855342}
   - component: {fileID: 539315100530131526}
+  - component: {fileID: 3164914600424827421}
   - component: {fileID: 2622002051789652577}
   - component: {fileID: 3098968362044660471}
   - component: {fileID: -6388758440425169218}
@@ -673,6 +674,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3164914600424827421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4570045811607053159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1a3c80031ccc9f42841b114da55ed9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageCounter: {fileID: 4373562767664674898}
+  playerTitle: {fileID: 7897259190490820064}
+  shakeFX: {fileID: -6388758440425169218}
 --- !u!114 &2622002051789652577
 MonoBehaviour:
   m_ObjectHideFlags: 0
