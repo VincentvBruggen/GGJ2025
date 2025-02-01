@@ -89,14 +89,18 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.collider.CompareTag("Player"))
         {
+            print("collision with: " + collision.collider.name);
             uiReference.shakeFX.shake();
 
             Vector3 myVelocity = rb.linearVelocity;
             Vector3 otherVelocity = collision.rigidbody.linearVelocity;
 
-            if(Vector3.Max(myVelocity, otherVelocity) == myVelocity)
+            if (myVelocity.magnitude > otherVelocity.magnitude)
             {
-                collision.gameObject.GetComponent<PlayerController>().currentDamage += Mathf.RoundToInt((myVelocity.magnitude / 2) * gameManager.damageMultiplier);
+                collision.gameObject.GetComponent<PlayerController>().currentDamage += Mathf.RoundToInt((myVelocity.magnitude) * gameManager.damageMultiplier);
+
+                collision.rigidbody.AddForceAtPosition(myVelocity * knockbackForce, transform.position, ForceMode.Impulse);
+                Debug.Log("my velocity is: "+ myVelocity + " I am: " + name);
             }
         }
     }
